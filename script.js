@@ -32,15 +32,12 @@ function updateDisplay() {
     const milliseconds = Math.floor((elapsedTime % 1000) / 10);
     
     // FormatTime
-    // const formattedHours = String(hours).padStart(2, '0');
+    const formattedHours = String(hours).padStart(2, '0');
     const formattedMinutes = String(minutes).padStart(2, '0');
     const formattedSeconds = String(seconds).padStart(2, '0');
     const formattedMilliseconds = String(milliseconds).padStart(2, '0');
     
-    // WITH HOURS
-    // timer.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}:${formattedMilliseconds}`;
-
-    timer.textContent = `${formattedMinutes}:${formattedSeconds}:${formattedMilliseconds}`;
+    timer.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}:${formattedMilliseconds}`;
 
 }
 
