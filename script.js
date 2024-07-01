@@ -12,19 +12,32 @@ const lap = document.getElementById("lap");
 
 
 function startTimer() {
-    // if not running
-    // Set find start time
-    // IntervalidId - setInterval for upadting the display
-    // Set running to true
-    
+    if(!running) {
+        startTime = Date.now() - elapsedTime;
+        intervalId = setInterval(updateDisplay, 10);
+        running = true;
+    } 
 }
 
 function updateDisplay() {
-    // Set elapsed time to current time - start time
-    // Convert to hours minutes and seconds and milliseconds if needed
-    // Format the time to a stign and use the .padStart method
-    // set the contet for the id of timer to have the formated time
+    // Calculating time elapsed by subtracting the startTIme from the current time.
+    currentTime = Date.now()
+    elapsedTime = currentTime - startTime;
+
+    const hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+    // Calculate the % of the hours first then convert to minutes
+    const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+    const milliseconds = Math.floor((elapsedTime % 1000) / 10);
     
+    // FormatTime
+    const formattedHours = String(hours).padStart(2, '0');
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(seconds).padStart(2, '0');
+    const formattedMilliseconds = String(milliseconds).padStart(2, '0');
+    // 
+    timer.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}:${formattedMilliseconds}`;
+
 }
 
 // Strat
