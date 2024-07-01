@@ -9,7 +9,7 @@ const start = document.getElementById("start");
 const stop = document.getElementById("stop");
 const reset = document.getElementById("reset");
 const lap = document.getElementById("lap");
-const lapRecord = document.getElementById("lapRecord");
+const laps = document.getElementById("laps");
 
 
 function startTimer() {
@@ -57,13 +57,19 @@ function resetTimer() {
     running = false;
     elapsedTime = 0;
     timer.textContent = "00:00:00";
+    laps.textContent = "";
 }
 
 function recordLap() {
+    // Get the current time.
     const lapTime = timer.textContent;
-    const lapElement = document.createElement('p');
-    lapElement.textContent = `Lap: ${lapTime}`;
-    lapRecord.appendChild(lapElement);
+
+    //Create a list item element
+    const lapElement = document.createElement('li');
+    // Add the time to the list item
+    lapElement.textContent = `${lapTime}`;
+
+    laps.appendChild(lapElement);
 }
 
 start.addEventListener('click', startTimer);
