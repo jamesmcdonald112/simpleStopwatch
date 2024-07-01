@@ -9,6 +9,7 @@ const start = document.getElementById("start");
 const stop = document.getElementById("stop");
 const reset = document.getElementById("reset");
 const lap = document.getElementById("lap");
+const lapRecord = document.getElementById("lapRecord");
 
 
 function startTimer() {
@@ -31,13 +32,41 @@ function updateDisplay() {
     const milliseconds = Math.floor((elapsedTime % 1000) / 10);
     
     // FormatTime
-    const formattedHours = String(hours).padStart(2, '0');
+    // const formattedHours = String(hours).padStart(2, '0');
     const formattedMinutes = String(minutes).padStart(2, '0');
     const formattedSeconds = String(seconds).padStart(2, '0');
     const formattedMilliseconds = String(milliseconds).padStart(2, '0');
-    // 
-    timer.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}:${formattedMilliseconds}`;
+    
+    // WITH HOURS
+    // timer.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}:${formattedMilliseconds}`;
+
+    timer.textContent = `${formattedMinutes}:${formattedSeconds}:${formattedMilliseconds}`;
 
 }
 
-// Strat
+function stopTimer() {
+    if(running) {
+        clearInterval(intervalId);
+        elapsedTime = Date.now() - startTime;
+        running = false;
+    }
+}
+
+function resetTimer() {
+    clearInterval(intervalId);
+    running = false;
+    elapsedTime = 0;
+    timer.textContent = "00:00:00";
+}
+
+function recordLap() {
+    const lapTime = timer.textContent;
+    const lapElement = document.createElement('p');
+    lapElement.textContent = `Lap: ${lapTime}`;
+    lapRecord.appendChild(lapElement);
+}
+
+start.addEventListener('click', startTimer);
+stop.addEventListener('click', stopTimer);
+reset.addEventListener('click', resetTimer);
+lap.addEventListener('click', recordLap);
